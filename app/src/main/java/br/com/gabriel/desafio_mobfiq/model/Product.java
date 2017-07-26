@@ -1,12 +1,15 @@
 
-package br.com.gabriel.desafio_mobfiq.data.remote.model.produto;
+package br.com.gabriel.desafio_mobfiq.model;
 
 import java.util.List;
 import android.os.Parcel;
 import android.os.Parcelable;
-import android.os.Parcelable.Creator;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+
+import br.com.gabriel.desafio_mobfiq.data.remote.model.produto.Sku;
+import br.com.gabriel.desafio_mobfiq.data.remote.model.produto.Specifications;
 
 public class Product implements Parcelable
 {
@@ -59,7 +62,7 @@ public class Product implements Parcelable
         public Product createFromParcel(Parcel in) {
             Product instance = new Product();
             instance.availability = ((Boolean) in.readValue((Boolean.class.getClassLoader())));
-            in.readList(instance.skus, (br.com.gabriel.desafio_mobfiq.data.remote.model.Sku.class.getClassLoader()));
+            in.readList(instance.skus, (Sku.class.getClassLoader()));
             instance.name = ((String) in.readValue((String.class.getClassLoader())));
             instance.id = ((String) in.readValue((String.class.getClassLoader())));
             instance.brand = ((String) in.readValue((String.class.getClassLoader())));

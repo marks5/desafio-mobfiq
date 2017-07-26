@@ -8,6 +8,8 @@ import android.os.Parcelable;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import br.com.gabriel.desafio_mobfiq.model.Category;
+
 public class Categorias implements Parcelable
 {
     @SerializedName("Categories")

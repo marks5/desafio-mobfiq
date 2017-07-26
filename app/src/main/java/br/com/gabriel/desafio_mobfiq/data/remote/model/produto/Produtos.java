@@ -4,9 +4,11 @@ package br.com.gabriel.desafio_mobfiq.data.remote.model.produto;
 import java.util.List;
 import android.os.Parcel;
 import android.os.Parcelable;
-import android.os.Parcelable.Creator;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+
+import br.com.gabriel.desafio_mobfiq.model.Product;
 
 public class Produtos implements Parcelable
 {
@@ -41,7 +43,7 @@ public class Produtos implements Parcelable
             instance.offset = ((Integer) in.readValue((Integer.class.getClassLoader())));
             instance.total = ((Integer) in.readValue((Integer.class.getClassLoader())));
             instance.delay = ((Double) in.readValue((Double.class.getClassLoader())));
-            in.readList(instance.products, (br.com.gabriel.desafio_mobfiq.data.remote.model.Product.class.getClassLoader()));
+            in.readList(instance.products, (Product.class.getClassLoader()));
             instance.apiQuery = ((String) in.readValue((String.class.getClassLoader())));
             return instance;
         }

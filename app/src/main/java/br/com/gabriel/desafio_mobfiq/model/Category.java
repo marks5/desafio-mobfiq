@@ -1,5 +1,5 @@
 
-package br.com.gabriel.desafio_mobfiq.data.remote.model.categoria;
+package br.com.gabriel.desafio_mobfiq.model;
 
 import java.util.List;
 import android.os.Parcel;
@@ -7,6 +7,9 @@ import android.os.Parcelable;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+
+import br.com.gabriel.desafio_mobfiq.data.remote.model.categoria.Redirect;
+import br.com.gabriel.desafio_mobfiq.data.remote.model.categoria.SubCategory;
 
 public class Category implements Parcelable
 {

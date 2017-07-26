@@ -1,4 +1,4 @@
-package br.com.gabriel.desafio_mobfiq.data;
+package br.com.gabriel.desafio_mobfiq.data.remote;
 
 import br.com.gabriel.desafio_mobfiq.data.remote.model.categoria.Categorias;
 import br.com.gabriel.desafio_mobfiq.data.remote.model.produto.ProdutoRequest;
