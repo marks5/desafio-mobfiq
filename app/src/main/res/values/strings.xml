@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Desafio_Mobfiq</string>
+    <string name="err_">Erro pls try again!</string>
 </resources>

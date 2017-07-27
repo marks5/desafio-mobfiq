@@ -10,6 +10,12 @@ public class ProdutoRequest {
     private int Offset;
     private int Size;
 
+    public ProdutoRequest(String query, int offset, int size) {
+        Query = query;
+        Offset = offset;
+        Size = size;
+    }
+
     public String getQuery() {
         return Query;
     }
