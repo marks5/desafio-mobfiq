@@ -7,6 +7,7 @@ import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
+import rx.Observable;
 
 /**
  * Created by Gabriel on 26/07/2017.
@@ -14,8 +15,8 @@ import retrofit2.http.POST;
 
 public interface MobfiqRestService {
     @POST("Search/Criteria")
-    Call<Produtos> buscaProduto(@Body ProdutoRequest body);
+    Observable<Produtos> buscaProduto(@Body ProdutoRequest body);
 
     @GET("StorePreference/CategoryTree")
-    Call<Categorias> listarCategorias();
+    Observable<Categorias> listarCategorias();
 }

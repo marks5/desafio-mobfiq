@@ -19,11 +19,11 @@ public class Injection {
     private static MobfiqRestService mobfiqRestService;
     private static Retrofit retrofitInstance;
 
-    public static MobfiqRepository provideListFruits() {
-        return new MobfiqRepositoryImp(provideFruitsRepo());
+    public static MobfiqRepository provideMobfiq() {
+        return new MobfiqRepositoryImp(provideMobfiqRepo());
     }
 
-    static MobfiqRestService provideFruitsRepo() {
+    static MobfiqRestService provideMobfiqRepo() {
         if (mobfiqRestService == null) {
             mobfiqRestService = getRetrofitInstance().create(MobfiqRestService.class);
         }

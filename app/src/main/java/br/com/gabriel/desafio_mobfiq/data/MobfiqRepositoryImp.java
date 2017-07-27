@@ -1,5 +1,6 @@
 package br.com.gabriel.desafio_mobfiq.data;
 
+import java.io.IOException;
 import java.util.List;
 
 import br.com.gabriel.desafio_mobfiq.data.remote.MobfiqRestService;
@@ -22,11 +23,25 @@ public class MobfiqRepositoryImp implements MobfiqRepository {
 
     @Override
     public Observable<List<Product>> searchProdutos(ProdutoRequest pr) {
-        return null;
+        return Observable.defer(() -> mobfiqRestService.buscaProduto(pr).concatMap(
+                produtos -> Observable.from(produtos.getProducts()).toList()))
+                .retryWhen(observable -> observable.flatMap(o -> {
+                    if (o instanceof IOException) {
+                        return Observable.just(null);
+                    }
+                    return Observable.error(o);
+                }));
     }
 
     @Override
     public Observable<List<Category>> listCategorias() {
-        return null;
+        return Observable.defer(() -> mobfiqRestService.listarCategorias().concatMap(
+                categorias -> Observable.from(categorias.getCategories()).toList()))
+                .retryWhen(observable -> observable.flatMap(o -> {
+                    if(o instanceof IOException){
+                        return Observable.just(null);
+                    }
+                    return Observable.error(o);
+                }));
     }
 }
