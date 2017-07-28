@@ -61,7 +61,6 @@ public class VitrineActivity extends AppCompatActivity implements VitrineContrac
         };
 
         rv_products.addOnScrollListener(scrollListener);
-
         rv_products.setAdapter(vitrineAdapter);
 
         toolbar = (Toolbar) findViewById(R.id.my_toolbar);
@@ -75,6 +74,7 @@ public class VitrineActivity extends AppCompatActivity implements VitrineContrac
     @Override
     public void showResults(List<Product> produtos) {
         rv_products.setVisibility(View.VISIBLE);
+        scrollListener.resetState();
         vitrineAdapter.setItems(produtos);
     }
 
