@@ -15,17 +15,20 @@ public class Image implements Parcelable
     @SerializedName("ImageTag")
     @Expose
     private String imageTag;
-
+    @SerializedName("Label")
+    @Expose
+    private Object label;
     public final static Parcelable.Creator<Image> CREATOR = new Creator<Image>() {
 
 
         @SuppressWarnings({
-            "unchecked"
+                "unchecked"
         })
         public Image createFromParcel(Parcel in) {
             Image instance = new Image();
             instance.imageUrl = ((String) in.readValue((String.class.getClassLoader())));
             instance.imageTag = ((String) in.readValue((String.class.getClassLoader())));
+            instance.label = ((Object) in.readValue((Object.class.getClassLoader())));
             return instance;
         }
 
@@ -33,8 +36,7 @@ public class Image implements Parcelable
             return (new Image[size]);
         }
 
-    }
-    ;
+    };
 
     public String getImageUrl() {
         return imageUrl;
@@ -52,13 +54,22 @@ public class Image implements Parcelable
         this.imageTag = imageTag;
     }
 
+    public Object getLabel() {
+        return label;
+    }
+
+    public void setLabel(Object label) {
+        this.label = label;
+    }
+
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeValue(imageUrl);
         dest.writeValue(imageTag);
+        dest.writeValue(label);
     }
 
     public int describeContents() {
-        return  0;
+        return 0;
     }
 
 }

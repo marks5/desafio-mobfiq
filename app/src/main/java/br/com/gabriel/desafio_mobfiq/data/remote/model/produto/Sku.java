@@ -51,7 +51,7 @@ public class Sku implements Parcelable
 
 
         @SuppressWarnings({
-            "unchecked"
+                "unchecked"
         })
         public Sku createFromParcel(Parcel in) {
             Sku instance = new Sku();
@@ -75,7 +75,7 @@ public class Sku implements Parcelable
         }
 
     }
-    ;
+            ;
 
     public String getId() {
         return id;
@@ -189,7 +189,7 @@ public class Sku implements Parcelable
     }
 
     public int describeContents() {
-        return  0;
+        return 0;
     }
 
 }
