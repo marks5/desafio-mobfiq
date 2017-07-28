@@ -11,6 +11,7 @@ import com.squareup.picasso.Callback;
 import java.util.List;
 
 import br.com.gabriel.desafio_mobfiq.R;
+import br.com.gabriel.desafio_mobfiq.data.remote.model.produto.Produtos;
 import br.com.gabriel.desafio_mobfiq.model.Product;
 import br.com.gabriel.desafio_mobfiq.util.PicassoCache;
 
@@ -67,5 +68,10 @@ public class VitrineAdapter extends RecyclerView.Adapter<VitrineViewHolder> {
     void setItems(List<Product> products){
         this.items = products;
         this.notifyDataSetChanged();
+    }
+
+    void arrangeItems(List<Product> products){
+        this.items.addAll(products);
+        this.notifyItemChanged(items.size()-1);
     }
 }

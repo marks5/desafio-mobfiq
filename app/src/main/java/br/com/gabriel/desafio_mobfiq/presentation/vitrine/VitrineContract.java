@@ -15,6 +15,8 @@ public interface VitrineContract {
 
         void showResults(List<Product> produtos);
 
+        void showResultsMore(List<Product> produtos);
+
         void showErrorSnack(String message);
 
         void showLoading();

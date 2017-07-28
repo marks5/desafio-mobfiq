@@ -51,10 +51,12 @@ public class VitrinePresenter extends BasePresenter<VitrineContract.View> implem
             public void onNext(List<Product> products) {
                 if(count>10){
                     getView().hideLoadingMore();
+                    getView().showResultsMore(products);
                 }else{
                     getView().hideLoading();
+                    getView().showResults(products);
                 }
-                getView().showResults(products);
+
             }
         }));
     }

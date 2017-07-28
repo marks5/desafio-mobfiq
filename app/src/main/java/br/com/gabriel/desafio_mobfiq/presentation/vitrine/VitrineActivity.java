@@ -148,4 +148,10 @@ public class VitrineActivity extends AppCompatActivity implements VitrineContrac
         super.onDestroy();
         vitrinePresenter.detachView();
     }
+
+    @Override
+    public void showResultsMore(List<Product> produtos) {
+        rv_products.setVisibility(View.VISIBLE);
+        vitrineAdapter.arrangeItems(produtos);
+    }
 }
