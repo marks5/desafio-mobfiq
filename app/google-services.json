@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "240631146719",
+    "firebase_url": "https://fullab-f2993.firebaseio.com",
+    "project_id": "fullab-f2993",
+    "storage_bucket": "fullab-f2993.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:240631146719:android:38d7cbc261044ac9",
+        "android_client_info": {
+          "package_name": "br.com.gabriel.desafio_mobfiq"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "240631146719-n4qipttihs6tp19pebcat99o4u533iet.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "br.com.gabriel.desafio_mobfiq",
+            "certificate_hash": "88ecf156a54894ce885c65c3e3b338cc4e9df814"
+          }
+        },
+        {
+          "client_id": "240631146719-6euanso65iks7o41abqg0of9huc5771n.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAmGiHPftH-dooKYiYw9XAI5G-7j5XowNU"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "240631146719-6euanso65iks7o41abqg0of9huc5771n.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
