@@ -1,4 +1,9 @@
 <resources>
     <string name="app_name">Desafio_Mobfiq</string>
     <string name="err_">Erro pls try again!</string>
+    <string name="txt_menu_inicio">Inicio</string>
+    <string name="txt_menu_categorias">Categorias</string>
+    <string name="txt_entre_cadastre">Logar</string>
+    <string name="txt_title_opcoes">Ola, usuario</string>
+    <string name="pesquise_um_produto_primeiro">Pesquise um produto primeiro</string>
 </resources>

@@ -21,6 +21,10 @@ public interface VitrineContract {
 
         void hideLoading();
 
+        void showLoadingMore();
+
+        void hideLoadingMore();
+
         void showFirstAccessMessage(String message);
     }
 

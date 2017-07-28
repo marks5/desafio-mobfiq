@@ -27,9 +27,13 @@ public class VitrinePresenter extends BasePresenter<VitrineContract.View> implem
 
     @Override
     public void searchProducts(String query) {
-        count = count +10;
         checkViewAttached();
-        getView().showLoading();
+        if(count>10){
+            getView().showLoadingMore();
+        }else{
+            getView().showLoading();
+        }
+
 
         addSubscription(mobfiqRepository.searchProdutos(new ProdutoRequest(query,0,count)).subscribeOn(mainScheduler).observeOn(ioScheduler).subscribe(new Subscriber<List<Product>>() {
             @Override
@@ -39,13 +43,19 @@ public class VitrinePresenter extends BasePresenter<VitrineContract.View> implem
 
             @Override
             public void onError(Throwable e) {
+
                 getView().hideLoading();
                 getView().showErrorSnack(e.getMessage());
             }
 
             @Override
             public void onNext(List<Product> products) {
-                getView().hideLoading();
+                if(count>10){
+                    getView().hideLoadingMore();
+                }else{
+                    getView().hideLoading();
+                }
+                count = count +10;
                 getView().showResults(products);
             }
         }));
