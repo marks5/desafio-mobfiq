@@ -108,6 +108,10 @@ public class Seller implements Parcelable
         return offer;
     }
 
+    public Double getDesconto(){
+        return (((this.price * 100)/this.listPrice) - 100) * -1;
+    }
+
     public void setOffer(Object offer) {
         this.offer = offer;
     }

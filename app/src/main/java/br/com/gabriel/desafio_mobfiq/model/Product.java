@@ -8,6 +8,7 @@ import android.os.Parcelable;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import br.com.gabriel.desafio_mobfiq.data.remote.model.produto.Image;
 import br.com.gabriel.desafio_mobfiq.data.remote.model.produto.Sku;
 import br.com.gabriel.desafio_mobfiq.data.remote.model.produto.Specifications;
 
@@ -49,7 +50,7 @@ public class Product implements Parcelable
     private List<String> videos = null;
     @SerializedName("Images")
     @Expose
-    private Object images;
+    private List<Image> images;
     @SerializedName("RealId")
     @Expose
     private String realId;
@@ -72,7 +73,7 @@ public class Product implements Parcelable
             instance.specifications = ((Specifications) in.readValue((Specifications.class.getClassLoader())));
             in.readList(instance.variations, (java.lang.String.class.getClassLoader()));
             in.readList(instance.videos, (java.lang.String.class.getClassLoader()));
-            instance.images = ((Object) in.readValue((Object.class.getClassLoader())));
+            in.readList(instance.images, (Image.class.getClassLoader()));
             instance.realId = ((String) in.readValue((String.class.getClassLoader())));
             return instance;
         }
@@ -172,11 +173,11 @@ public class Product implements Parcelable
         this.videos = videos;
     }
 
-    public Object getImages() {
+    public List<Image> getImages() {
         return images;
     }
 
-    public void setImages(Object images) {
+    public void setImages(List<Image> images) {
         this.images = images;
     }
 

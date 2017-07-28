@@ -40,7 +40,7 @@ public class VitrineActivity extends AppCompatActivity implements VitrineContrac
         progressBarMore = (ProgressBar) findViewById(R.id.progressbar_more);
         tv_oi = (TextView) findViewById(R.id.tv_oi);
 
-        vitrineAdapter = new VitrineAdapter(null);
+        vitrineAdapter = new VitrineAdapter(null,this);
         GridLayoutManager glm = new GridLayoutManager(this, 2);
         rv_products.setLayoutManager(glm);
         rv_products.setAdapter(vitrineAdapter);
@@ -83,7 +83,7 @@ public class VitrineActivity extends AppCompatActivity implements VitrineContrac
     }
 
     @Override
-    public void showFirstAccessMessage(String message) {
+    public void showFirstAccessMessage() {
 
     }
 
