@@ -58,14 +58,14 @@ public class Sku implements Parcelable
             instance.id = ((String) in.readValue((String.class.getClassLoader())));
             instance.name = ((String) in.readValue((String.class.getClassLoader())));
             instance.order = ((Integer) in.readValue((Integer.class.getClassLoader())));
-            in.readList(instance.sellers, (br.com.gabriel.desafio_mobfiq.data.remote.model.Seller.class.getClassLoader()));
-            in.readList(instance.images, (br.com.gabriel.desafio_mobfiq.data.remote.model.Image.class.getClassLoader()));
+            in.readList(instance.sellers, (Seller.class.getClassLoader()));
+            in.readList(instance.images, (Image.class.getClassLoader()));
             instance.variations = ((Variations) in.readValue((Variations.class.getClassLoader())));
             instance.skuName = ((String) in.readValue((String.class.getClassLoader())));
             instance.unitMultiplier = ((Integer) in.readValue((Integer.class.getClassLoader())));
             instance.complementName = ((String) in.readValue((String.class.getClassLoader())));
             instance.measurementUnit = ((String) in.readValue((String.class.getClassLoader())));
-            in.readList(instance.referenceId, (br.com.gabriel.desafio_mobfiq.data.remote.model.ReferenceId.class.getClassLoader()));
+            in.readList(instance.referenceId, (ReferenceId.class.getClassLoader()));
             instance.eAN = ((String) in.readValue((String.class.getClassLoader())));
             return instance;
         }

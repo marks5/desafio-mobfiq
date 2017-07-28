@@ -48,9 +48,11 @@ public class Product implements Parcelable
     @SerializedName("Videos")
     @Expose
     private List<String> videos = null;
+
     @SerializedName("Images")
     @Expose
-    private List<Image> images;
+    private List<Image> images = null;
+
     @SerializedName("RealId")
     @Expose
     private String realId;

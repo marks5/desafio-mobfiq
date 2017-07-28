@@ -64,10 +64,10 @@ public class VitrineActivity extends AppCompatActivity implements VitrineContrac
 
         rv_products.setAdapter(vitrineAdapter);
 
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar = (Toolbar) findViewById(R.id.my_toolbar);
         setSupportActionBar(toolbar);
 
-        snackbar = Snackbar.make(findViewById(R.id.mConstraintLayout), R.string.err_,Snackbar.LENGTH_SHORT);
+        snackbar = Snackbar.make(findViewById(R.id.coordinator_main), R.string.err_,Snackbar.LENGTH_SHORT);
 
         vitrinePresenter.searchProducts("",count);
     }
@@ -118,7 +118,6 @@ public class VitrineActivity extends AppCompatActivity implements VitrineContrac
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         super.onCreateOptionsMenu(menu);
-        menu.clear();
         getMenuInflater().inflate(R.menu.menu_search, menu);
         final MenuItem item = menu.findItem(R.id.action_search);
         searchView = (SearchView) item.getActionView();

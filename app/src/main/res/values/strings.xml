@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Desafio_Mobfiq</string>
+    <string name="app_name"></string>
     <string name="err_">Erro pls try again!</string>
     <string name="txt_menu_inicio">Inicio</string>
     <string name="txt_menu_categorias">Categorias</string>
