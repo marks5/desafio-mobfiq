@@ -1,11 +1,15 @@
 package br.com.gabriel.desafio_mobfiq.presentation.vitrine;
 
 import android.support.design.widget.Snackbar;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SearchView;
+import android.support.v7.widget.Toolbar;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -15,6 +19,7 @@ import java.util.List;
 import br.com.gabriel.desafio_mobfiq.R;
 import br.com.gabriel.desafio_mobfiq.injection.Injection;
 import br.com.gabriel.desafio_mobfiq.model.Product;
+import br.com.gabriel.desafio_mobfiq.util.EndlessRecyclerViewScrollListener;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
@@ -25,7 +30,11 @@ public class VitrineActivity extends AppCompatActivity implements VitrineContrac
     private RecyclerView rv_products;
     private VitrineAdapter vitrineAdapter;
     private ProgressBar progressBar, progressBarMore;
-    private TextView tv_oi;
+    private SearchView searchView;
+    private Toolbar toolbar;
+    private EndlessRecyclerViewScrollListener scrollListener;
+    private String querye = "";
+    private int count = 0;
 
 
     @Override
@@ -38,25 +47,41 @@ public class VitrineActivity extends AppCompatActivity implements VitrineContrac
         rv_products = (RecyclerView) findViewById(R.id.rv_products);
         progressBar = (ProgressBar) findViewById(R.id.progressbar);
         progressBarMore = (ProgressBar) findViewById(R.id.progressbar_more);
-        tv_oi = (TextView) findViewById(R.id.tv_oi);
 
         vitrineAdapter = new VitrineAdapter(null,this);
         GridLayoutManager glm = new GridLayoutManager(this, 2);
         rv_products.setLayoutManager(glm);
+
+        scrollListener = new EndlessRecyclerViewScrollListener(glm) {
+            @Override
+            public void onLoadMore(int page, int totalItemsCount, RecyclerView view) {
+                count = count +10;
+                vitrinePresenter.searchProducts(querye,count);
+            }
+        };
+
+        rv_products.addOnScrollListener(scrollListener);
+
         rv_products.setAdapter(vitrineAdapter);
 
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
         snackbar = Snackbar.make(findViewById(R.id.mConstraintLayout), R.string.err_,Snackbar.LENGTH_SHORT);
+
+        vitrinePresenter.searchProducts("",count);
     }
 
     @Override
     public void showResults(List<Product> produtos) {
-
+        rv_products.setVisibility(View.VISIBLE);
+        vitrineAdapter.setItems(produtos);
     }
 
     @Override
     public void showErrorSnack(String message) {
         snackbar.setAction(message, view -> {
-            //try again search
+            vitrinePresenter.searchProducts(querye,count);
         });
 
         snackbar.show();
@@ -64,31 +89,64 @@ public class VitrineActivity extends AppCompatActivity implements VitrineContrac
 
     @Override
     public void showLoading() {
-
+        progressBar.setVisibility(View.VISIBLE);
+        rv_products.setVisibility(View.GONE);
+        progressBarMore.setVisibility(View.GONE);
     }
 
     @Override
     public void hideLoading() {
-
+        rv_products.setVisibility(View.VISIBLE);
+        progressBarMore.setVisibility(View.GONE);
+        progressBar.setVisibility(View.GONE);
     }
 
     @Override
     public void showLoadingMore() {
-
+        progressBarMore.setVisibility(View.VISIBLE);
+        rv_products.setVisibility(View.VISIBLE);
+        progressBar.setVisibility(View.GONE);
     }
 
     @Override
     public void hideLoadingMore() {
-
-    }
-
-    @Override
-    public void showFirstAccessMessage() {
-
+        progressBarMore.setVisibility(View.GONE);
+        rv_products.setVisibility(View.VISIBLE);
+        progressBar.setVisibility(View.GONE);
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        return super.onCreateOptionsMenu(menu);
+        super.onCreateOptionsMenu(menu);
+        menu.clear();
+        getMenuInflater().inflate(R.menu.menu_search, menu);
+        final MenuItem item = menu.findItem(R.id.action_search);
+        searchView = (SearchView) item.getActionView();
+        searchView.setQueryHint("Buscar...");
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override public boolean onQueryTextSubmit(String query) {
+                if (!searchView.isIconified()) {
+                    searchView.setIconified(true);
+                }
+                querye = query;
+                count = 0;
+                vitrinePresenter.searchProducts(query,count);
+                toolbar.setTitle(query);
+                item.collapseActionView();
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                return false;
+            }
+        });
+        return true;
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        vitrinePresenter.detachView();
     }
 }

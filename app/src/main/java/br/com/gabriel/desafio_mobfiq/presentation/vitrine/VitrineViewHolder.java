@@ -32,7 +32,6 @@ public class VitrineViewHolder extends RecyclerView.ViewHolder {
         progressBar = (ProgressBar) itemView.findViewById(R.id.progressbar_item);
 
         img_ = (ImageView) itemView.findViewById(R.id.img_);
-
     }
 
 }

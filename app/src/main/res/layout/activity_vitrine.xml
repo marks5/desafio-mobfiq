@@ -53,13 +53,6 @@
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"/>
 
-            <TextView
-                android:id="@+id/tv_oi"
-                android:layout_centerInParent="true"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/pesquise_um_produto_primeiro"/>
-
             <ProgressBar
                 android:id="@+id/progressbar_more"
                 android:layout_width="match_parent"

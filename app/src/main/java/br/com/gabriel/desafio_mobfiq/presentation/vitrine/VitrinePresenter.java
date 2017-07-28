@@ -17,7 +17,6 @@ public class VitrinePresenter extends BasePresenter<VitrineContract.View> implem
 
     private final Scheduler mainScheduler, ioScheduler;
     private MobfiqRepository mobfiqRepository;
-    private int count;
 
     public VitrinePresenter(Scheduler mainScheduler, Scheduler ioScheduler, MobfiqRepository mobfiqRepository) {
         this.mainScheduler = mainScheduler;
@@ -26,7 +25,7 @@ public class VitrinePresenter extends BasePresenter<VitrineContract.View> implem
     }
 
     @Override
-    public void searchProducts(String query) {
+    public void searchProducts(String query,final int count) {
         checkViewAttached();
         if(count>10){
             getView().showLoadingMore();
@@ -55,14 +54,9 @@ public class VitrinePresenter extends BasePresenter<VitrineContract.View> implem
                 }else{
                     getView().hideLoading();
                 }
-                count = count +10;
                 getView().showResults(products);
             }
         }));
     }
 
-    @Override
-    public void showFirstAccessMessage(String message) {
-        getView().showFirstAccessMessage(message);
-    }
 }

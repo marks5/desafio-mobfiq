@@ -24,13 +24,9 @@ public interface VitrineContract {
         void showLoadingMore();
 
         void hideLoadingMore();
-
-        void showFirstAccessMessage();
     }
 
     interface Presenter extends MvpPresenter<View> {
-        void searchProducts(String query);
-
-        void showFirstAccessMessage();
+        void searchProducts(String query, int count);
     }
 }
