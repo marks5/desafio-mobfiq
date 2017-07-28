@@ -6,4 +6,7 @@
     <string name="txt_entre_cadastre">Logar</string>
     <string name="txt_title_opcoes">Ola, usuario</string>
     <string name="pesquise_um_produto_primeiro">Pesquise um produto primeiro</string>
+    <string name="preco"><stroke>Preço</stroke></string>
+    <string name="preco_">Preço</string>
+    <string name="opcao_parcel">Opção parcel</string>
 </resources>
