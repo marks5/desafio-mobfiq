@@ -12,11 +12,9 @@ import com.google.firebase.iid.FirebaseInstanceIdService;
 
 public class PushwooshFCM extends FirebaseInstanceIdService {
 
-    private static String TAG = "TOKEN";
-
     @Override
     public void onTokenRefresh() {
         String refreshedToken = FirebaseInstanceId.getInstance().getToken();
-        Log.d(TAG, "Refreshed token: " + refreshedToken);
+        Log.d("token", "Refreshed token: " + refreshedToken);
     }
 }

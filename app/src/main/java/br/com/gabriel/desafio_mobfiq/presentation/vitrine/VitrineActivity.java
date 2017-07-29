@@ -1,7 +1,12 @@
 package br.com.gabriel.desafio_mobfiq.presentation.vitrine;
 
+import android.content.Intent;
+import android.support.annotation.NonNull;
+import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.Fragment;
 import android.support.v4.view.MenuItemCompat;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
@@ -11,14 +16,19 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+
+import com.google.firebase.FirebaseApp;
 
 import java.util.List;
 
 import br.com.gabriel.desafio_mobfiq.R;
 import br.com.gabriel.desafio_mobfiq.injection.Injection;
 import br.com.gabriel.desafio_mobfiq.model.Product;
+import br.com.gabriel.desafio_mobfiq.presentation.categorias.CategoriasActivity;
 import br.com.gabriel.desafio_mobfiq.util.EndlessRecyclerViewScrollListener;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
@@ -35,6 +45,9 @@ public class VitrineActivity extends AppCompatActivity implements VitrineContrac
     private EndlessRecyclerViewScrollListener scrollListener;
     private String querye = "";
     private int count = 0;
+    private DrawerLayout drawer_layout;
+    private NavigationView left_drawer;
+    private ImageView btn_drawer;
 
 
     @Override
@@ -44,9 +57,14 @@ public class VitrineActivity extends AppCompatActivity implements VitrineContrac
         vitrinePresenter = new VitrinePresenter(Schedulers.io(), AndroidSchedulers.mainThread(),Injection.provideMobfiq());
         vitrinePresenter.attachView(this);
 
+        FirebaseApp.getInstance();
+
         rv_products = (RecyclerView) findViewById(R.id.rv_products);
         progressBar = (ProgressBar) findViewById(R.id.progressbar);
         progressBarMore = (ProgressBar) findViewById(R.id.progressbar_more);
+        drawer_layout = (DrawerLayout) findViewById(R.id.drawer_layout);
+        left_drawer = (NavigationView) findViewById(R.id.left_drawer);
+        btn_drawer = (ImageView) findViewById(R.id.icon_dehaze);
 
         vitrineAdapter = new VitrineAdapter(null,this);
         GridLayoutManager glm = new GridLayoutManager(this, 2);
@@ -65,6 +83,34 @@ public class VitrineActivity extends AppCompatActivity implements VitrineContrac
 
         toolbar = (Toolbar) findViewById(R.id.my_toolbar);
         setSupportActionBar(toolbar);
+
+        btn_drawer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                drawer_layout.openDrawer(left_drawer);
+            }
+        });
+
+        left_drawer.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                int id = item.getItemId();
+                item.setChecked(true);
+                switch (id){
+                    case R.id.menu_inicio:
+                        //aqui não faz nada msm
+                        drawer_layout.closeDrawers();
+                        break;
+                    case R.id.menu_categorias:
+                        startActivity(new Intent(VitrineActivity.this, CategoriasActivity.class));
+                        drawer_layout.closeDrawers();
+                        break;
+                    default:
+                        break;
+                }
+                return false;
+            }
+        });
 
         snackbar = Snackbar.make(findViewById(R.id.coordinator_main), R.string.err_,Snackbar.LENGTH_SHORT);
 
