@@ -48,6 +48,7 @@ public class VitrineActivity extends AppCompatActivity implements VitrineContrac
     private DrawerLayout drawer_layout;
     private NavigationView left_drawer;
     private ImageView btn_drawer;
+    private ImageView icon_clear;
 
 
     @Override
@@ -65,6 +66,7 @@ public class VitrineActivity extends AppCompatActivity implements VitrineContrac
         drawer_layout = (DrawerLayout) findViewById(R.id.drawer_layout);
         left_drawer = (NavigationView) findViewById(R.id.left_drawer);
         btn_drawer = (ImageView) findViewById(R.id.icon_dehaze);
+        icon_clear = (ImageView) findViewById(R.id.icon_clear);
 
         vitrineAdapter = new VitrineAdapter(null,this);
         GridLayoutManager glm = new GridLayoutManager(this, 2);
@@ -83,7 +85,7 @@ public class VitrineActivity extends AppCompatActivity implements VitrineContrac
 
         toolbar = (Toolbar) findViewById(R.id.my_toolbar);
         setSupportActionBar(toolbar);
-        toolbar.setTitle("");
+        toolbar.setTitle(" ");
 
         btn_drawer.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -99,7 +101,6 @@ public class VitrineActivity extends AppCompatActivity implements VitrineContrac
                 item.setChecked(true);
                 switch (id){
                     case R.id.menu_inicio:
-                        //aqui não faz nada msm
                         drawer_layout.closeDrawers();
                         break;
                     case R.id.menu_categorias:
@@ -113,6 +114,14 @@ public class VitrineActivity extends AppCompatActivity implements VitrineContrac
             }
         });
 
+        icon_clear.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                scrollListener.resetState();
+                vitrinePresenter.searchProducts("",0);
+            }
+        });
+
         snackbar = Snackbar.make(findViewById(R.id.coordinator_main), R.string.err_,Snackbar.LENGTH_SHORT);
 
         vitrinePresenter.searchProducts("",count);
@@ -120,6 +129,7 @@ public class VitrineActivity extends AppCompatActivity implements VitrineContrac
 
     @Override
     public void showResults(List<Product> produtos) {
+        toolbar.setTitle("");
         rv_products.setVisibility(View.VISIBLE);
         scrollListener.resetState();
         vitrineAdapter.setItems(produtos);
@@ -174,6 +184,7 @@ public class VitrineActivity extends AppCompatActivity implements VitrineContrac
                 if (!searchView.isIconified()) {
                     searchView.setIconified(true);
                 }
+                icon_clear.setVisibility(View.VISIBLE);
                 querye = query;
                 count = 0;
                 vitrinePresenter.searchProducts(query,count);
@@ -184,6 +195,16 @@ public class VitrineActivity extends AppCompatActivity implements VitrineContrac
 
             @Override
             public boolean onQueryTextChange(String newText) {
+                return false;
+            }
+        });
+
+        searchView.setOnCloseListener(new SearchView.OnCloseListener() {
+            @Override
+            public boolean onClose() {
+                count = 0;
+                vitrinePresenter.searchProducts("",count);
+                item.collapseActionView();
                 return false;
             }
         });
