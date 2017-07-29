@@ -83,6 +83,7 @@ public class VitrineActivity extends AppCompatActivity implements VitrineContrac
 
         toolbar = (Toolbar) findViewById(R.id.my_toolbar);
         setSupportActionBar(toolbar);
+        toolbar.setTitle("");
 
         btn_drawer.setOnClickListener(new View.OnClickListener() {
             @Override
